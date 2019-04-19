@@ -353,14 +353,14 @@ export default class DateFilterControl extends React.Component {
                           key={RELATIVE_TIME_OPTIONS.LAST}
                           eventKey={RELATIVE_TIME_OPTIONS.LAST}
                           active={this.state.rel === RELATIVE_TIME_OPTIONS.LAST}
-                        >Last
+                        >Посл.
                         </MenuItem>
                         <MenuItem
                           onSelect={value => this.setCustomRange('rel', value)}
                           key={RELATIVE_TIME_OPTIONS.NEXT}
                           eventKey={RELATIVE_TIME_OPTIONS.NEXT}
                           active={this.state.rel === RELATIVE_TIME_OPTIONS.NEXT}
-                        >Next
+                        >След.
                         </MenuItem>
                       </DropdownButton>
                     </div>
