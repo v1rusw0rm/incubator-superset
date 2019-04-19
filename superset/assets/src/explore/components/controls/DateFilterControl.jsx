@@ -52,16 +52,16 @@ const TABS = Object.freeze({
   CUSTOM: 'custom',
 });
 const RELATIVE_TIME_OPTIONS = Object.freeze({
-  LAST: 'Last',
-  NEXT: 'Next',
+  LAST: 'Последние',
+  NEXT: 'Следующие',
 });
 const COMMON_TIME_FRAMES = [
-  'Last day',
-  'Last week',
-  'Last month',
-  'Last quarter',
-  'Last year',
-  'No filter',
+  'Посление сутки',
+  'Последняя неделя',
+  'Последний месяц',
+  'Последний квартал',
+  'Последний год',
+  'Без фильтрации',
 ];
 const TIME_GRAIN_OPTIONS = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
 

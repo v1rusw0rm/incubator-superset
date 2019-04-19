@@ -953,6 +953,11 @@ def get_since_until(time_range: Optional[str] = None,
     separator = ' : '
     relative_end = parse_human_datetime(relative_end if relative_end else 'today')
     common_time_frames = {
+        'Посление сутки': (relative_end - relativedelta(days=1), relative_end),  # noqa: T400
+        'Последняя неделя': (relative_end - relativedelta(weeks=1), relative_end),  # noqa: T400
+        'Последний месяц': (relative_end - relativedelta(months=1), relative_end),  # noqa: E501, T400
+        'Последний квартал': (relative_end - relativedelta(months=3), relative_end),  # noqa: E501, T400
+        'Последний год': (relative_end - relativedelta(years=1), relative_end),  # noqa: T400
         'Last day': (relative_end - relativedelta(days=1), relative_end),  # noqa: T400
         'Last week': (relative_end - relativedelta(weeks=1), relative_end),  # noqa: T400
         'Last month': (relative_end - relativedelta(months=1), relative_end),  # noqa: E501, T400
@@ -969,11 +974,11 @@ def get_since_until(time_range: Optional[str] = None,
             until = parse_human_datetime(until)
         elif time_range in common_time_frames:
             since, until = common_time_frames[time_range]
-        elif time_range == 'No filter':
+        elif time_range == 'Без фильтрации' or time_range == 'No filter':
             since = until = None
         else:
             rel, num, grain = time_range.split()
-            if rel == 'Last':
+            if rel == 'Last' or rel == 'Последние':
                 since = relative_end - relativedelta(**{grain: int(num)})  # noqa: T400
                 until = relative_end
             else:  # rel == 'Next'
