@@ -52,8 +52,8 @@ const TABS = Object.freeze({
   CUSTOM: 'custom',
 });
 const RELATIVE_TIME_OPTIONS = Object.freeze({
-  LAST: 'Последние',
-  NEXT: 'Следующие',
+  LAST: 'Посл.',
+  NEXT: 'След.',
 });
 const COMMON_TIME_FRAMES = [
   'Посление сутки',
@@ -63,7 +63,7 @@ const COMMON_TIME_FRAMES = [
   'Последний год',
   'Без фильтрации',
 ];
-const TIME_GRAIN_OPTIONS = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+const TIME_GRAIN_OPTIONS = ['секунд', 'минут', 'часов', 'дней', 'недель', 'месяцев', 'лет'];
 
 const MOMENT_FORMAT = 'YYYY-MM-DD[T]HH:mm:ss';
 const DEFAULT_SINCE = moment().startOf('day').subtract(7, 'days').format(MOMENT_FORMAT);
@@ -87,7 +87,7 @@ const propTypes = {
 const defaultProps = {
   animation: true,
   onChange: () => {},
-  value: 'Last week',
+  value: 'Последняя неделя',
 };
 
 function isValidMoment(s) {
