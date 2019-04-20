@@ -365,7 +365,7 @@ class BaseViz(object):
         df = payload.get('df')
         if self.status != utils.QueryStatus.FAILED:
             if df is not None and df.empty:
-                payload['error'] = 'No data'
+                payload['error'] = 'Нет данных'
             else:
                 payload['data'] = self.get_data(df)
         if 'df' in payload:
