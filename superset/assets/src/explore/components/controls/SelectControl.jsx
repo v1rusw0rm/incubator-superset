@@ -69,7 +69,7 @@ const defaultProps = {
   valueRenderer: opt => opt.label,
   valueKey: 'value',
   noResultsText: t('No results found'),
-  promptTextCreator: label => `Create Option ${label}`,
+  promptTextCreator: label => `Добавить ${label}`,
   commaChoosesOption: true,
   allowAll: false,
 };
