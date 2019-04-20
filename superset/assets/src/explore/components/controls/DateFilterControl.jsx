@@ -52,18 +52,18 @@ const TABS = Object.freeze({
   CUSTOM: 'custom',
 });
 const RELATIVE_TIME_OPTIONS = Object.freeze({
-  LAST: 'Last',
-  NEXT: 'Next',
+  LAST: 'Посл.',
+  NEXT: 'След.',
 });
 const COMMON_TIME_FRAMES = [
-  'Last day',
-  'Last week',
-  'Last month',
-  'Last quarter',
-  'Last year',
-  'No filter',
+  'Посление сутки',
+  'Последняя неделя',
+  'Последний месяц',
+  'Последний квартал',
+  'Последний год',
+  'Без фильтрации',
 ];
-const TIME_GRAIN_OPTIONS = ['seconds', 'minutes', 'hours', 'days', 'weeks', 'months', 'years'];
+const TIME_GRAIN_OPTIONS = ['секунд', 'минут', 'часов', 'дней', 'недель', 'месяцев', 'лет'];
 
 const MOMENT_FORMAT = 'YYYY-MM-DD[T]HH:mm:ss';
 const DEFAULT_SINCE = moment().startOf('day').subtract(7, 'days').format(MOMENT_FORMAT);
@@ -87,7 +87,7 @@ const propTypes = {
 const defaultProps = {
   animation: true,
   onChange: () => {},
-  value: 'Last week',
+  value: 'Последняя неделя',
 };
 
 function isValidMoment(s) {
@@ -329,13 +329,13 @@ export default class DateFilterControl extends React.Component {
             className="time-filter-tabs"
             onSelect={this.changeTab}
           >
-            <Tab eventKey={1} title="Defaults">
+            <Tab eventKey={1} title="По умолчанию">
               <FormGroup>{timeFrames}</FormGroup>
             </Tab>
-            <Tab eventKey={2} title="Custom">
+            <Tab eventKey={2} title="Вручную">
               <FormGroup>
                 <PopoverSection
-                  title="Relative to today"
+                  title="Относительно тек. момента"
                   isSelected={this.state.type === TYPES.CUSTOM_RANGE}
                   onSelect={this.setTypeCustomRange}
                 >
@@ -353,14 +353,14 @@ export default class DateFilterControl extends React.Component {
                           key={RELATIVE_TIME_OPTIONS.LAST}
                           eventKey={RELATIVE_TIME_OPTIONS.LAST}
                           active={this.state.rel === RELATIVE_TIME_OPTIONS.LAST}
-                        >Last
+                        >Посл.
                         </MenuItem>
                         <MenuItem
                           onSelect={value => this.setCustomRange('rel', value)}
                           key={RELATIVE_TIME_OPTIONS.NEXT}
                           eventKey={RELATIVE_TIME_OPTIONS.NEXT}
                           active={this.state.rel === RELATIVE_TIME_OPTIONS.NEXT}
-                        >Next
+                        >След.
                         </MenuItem>
                       </DropdownButton>
                     </div>
@@ -389,7 +389,7 @@ export default class DateFilterControl extends React.Component {
                   </div>
                 </PopoverSection>
                 <PopoverSection
-                  title="Start / end"
+                  title="Начало / конец"
                   isSelected={this.state.type === TYPES.CUSTOM_START_END}
                   onSelect={this.setTypeCustomStartEnd}
                   info={FREEFORM_TOOLTIP}

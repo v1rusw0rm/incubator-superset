@@ -950,9 +950,18 @@ def get_since_until(time_range: Optional[str] = None,
         - Next X seconds/minutes/hours/days/weeks/months/years
 
     """
+    logging.info("time_range " + str(time_range))
+    logging.info("relative_end " + str(relative_end))
+    logging.info("time_shift " + str(time_shift))
     separator = ' : '
-    relative_end = parse_human_datetime(relative_end if relative_end else 'today')
+    #relative_end = parse_human_datetime(relative_end if relative_end else 'now')
+    relative_end = parse_human_datetime('now')
     common_time_frames = {
+        'Посление сутки': (relative_end - relativedelta(days=1), relative_end),  # noqa: T400
+        'Последняя неделя': (relative_end - relativedelta(weeks=1), relative_end),  # noqa: T400
+        'Последний месяц': (relative_end - relativedelta(months=1), relative_end),  # noqa: E501, T400
+        'Последний квартал': (relative_end - relativedelta(months=3), relative_end),  # noqa: E501, T400
+        'Последний год': (relative_end - relativedelta(years=1), relative_end),  # noqa: T400
         'Last day': (relative_end - relativedelta(days=1), relative_end),  # noqa: T400
         'Last week': (relative_end - relativedelta(weeks=1), relative_end),  # noqa: T400
         'Last month': (relative_end - relativedelta(months=1), relative_end),  # noqa: E501, T400
@@ -969,11 +978,28 @@ def get_since_until(time_range: Optional[str] = None,
             until = parse_human_datetime(until)
         elif time_range in common_time_frames:
             since, until = common_time_frames[time_range]
-        elif time_range == 'No filter':
+        elif time_range == 'Без фильтрации' or time_range == 'No filter':
             since = until = None
         else:
-            rel, num, grain = time_range.split()
-            if rel == 'Last':
+            rel, num, grain_string = time_range.split()
+            grain_strings = {
+                'seconds': 'seconds',
+                'minutes': 'minutes',
+                'hours': 'hours',
+                'days': 'days',
+                'weeks': 'weeks',
+                'months': 'months',
+                'years': 'years',
+                'секунд': 'seconds',
+                'минут': 'minutes',
+                'часов': 'hours',
+                'дней': 'days',
+                'недель': 'weeks',
+                'месяцев': 'months',
+                'лет': 'years',
+            }
+            grain = grain_strings[grain_string]
+            if rel == 'Last' or rel == 'Посл.':
                 since = relative_end - relativedelta(**{grain: int(num)})  # noqa: T400
                 until = relative_end
             else:  # rel == 'Next'
@@ -993,7 +1019,7 @@ def get_since_until(time_range: Optional[str] = None,
 
     if since and until and since > until:
         raise ValueError(_('From date cannot be larger than to date'))
-
+    logging.info("since: " + str(since) + "; until: " + str(until))
     return since, until  # noqa: T400
 
 
